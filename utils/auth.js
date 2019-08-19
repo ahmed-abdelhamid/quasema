@@ -18,8 +18,7 @@ export const logout = () => {
 };
 
 // Gets the display name of JSX component for dev tools
-const getDisplayName = Component =>
-  Component.displayName || Component.name || 'Component';
+const getDisplayName = Component => Component.displayName || Component.name || 'Component';
 
 // Check if User is Authorized or Not
 export const withAuthSync = WrappedComponent =>
@@ -30,8 +29,7 @@ export const withAuthSync = WrappedComponent =>
       const token = auth(ctx);
 
       const componentProps =
-        WrappedComponent.getInitialProps &&
-        (await WrappedComponent.getInitialProps(ctx));
+        WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx));
 
       return { ...componentProps, token };
     }

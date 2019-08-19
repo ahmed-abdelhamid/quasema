@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import Router from 'next/router';
+import nextCookie from 'next-cookies';
 import axios from 'axios';
 import { withFormik } from 'formik';
+import { connect } from 'react-redux';
 import * as Yup from 'yup';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -11,6 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { useStyles } from '../styles/loginPage';
 import { login } from '../utils/auth';
+import { storeAdminData } from '../redux/actions/authActions';
+import Loader from '../components/Loader';
 import translations from '../translations/arabicTranslation';
 
 const validationSchema = Yup.object({
@@ -18,7 +23,7 @@ const validationSchema = Yup.object({
   password: Yup.string('').required(translations.REQUIRED_FILED)
 });
 
-const Index = ({
+const Login = ({
   values: { mobileOrEmail, password },
   errors,
   touched,
@@ -26,7 +31,8 @@ const Index = ({
   handleChange,
   isValid,
   setFieldTouched,
-  isSubmitting
+  isSubmitting,
+  auth
 }) => {
   const classes = useStyles();
 
@@ -35,6 +41,12 @@ const Index = ({
     handleChange(e);
     setFieldTouched(name, true, false);
   };
+
+  useEffect(() => {
+    if (auth) Router.push('/');
+  }, [auth]);
+
+  if (auth) return <Loader title={translations.LOADING} />;
 
   return (
     <Container component="main" maxWidth="xs">
@@ -90,9 +102,7 @@ const Index = ({
             >
               {translations.LOGIN}
             </Button>
-            {isSubmitting && (
-              <CircularProgress size={24} className={classes.loading} />
-            )}
+            {isSubmitting && <CircularProgress size={24} className={classes.loading} />}
           </div>
         </form>
       </div>
@@ -100,26 +110,35 @@ const Index = ({
   );
 };
 
-export default withFormik({
+Login.getInitialProps = async ctx => {
+  const { token } = nextCookie(ctx);
+  return token ? { auth: JSON.parse(token) } : {};
+};
+
+const LoginWithFormik = withFormik({
   displayName: 'LoginForm',
   mapPropsToValues: () => ({ mobileOrEmail: '', password: '' }),
   validationSchema,
-  handleSubmit: async (
-    { mobileOrEmail, password },
-    { setSubmitting, setFieldError }
-  ) => {
+  handleSubmit: async ({ mobileOrEmail, password }, { setSubmitting, setFieldError, props }) => {
     try {
-      const { data: token } = await axios.post(
-        `${process.env.API_URL}/admin/login`,
-        {
-          mobileOrEmail,
-          password
-        }
-      );
+      const { data: token } = await axios.post(`${process.env.API_URL}/admin/login`, {
+        mobileOrEmail,
+        password
+      });
+      props.storeAdminData(token);
       login({ token });
     } catch (e) {
       setFieldError('credentials', translations.CREDENTIALS_ERROR);
       setSubmitting(false);
     }
   }
-})(Index);
+})(Login);
+
+const mapDispatchToProps = dispatch => ({
+  storeAdminData: admin => dispatch(storeAdminData(admin))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(LoginWithFormik);

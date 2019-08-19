@@ -1,4 +1,5 @@
 import React from 'react';
+import nextCookie from 'next-cookies';
 import { Provider } from 'react-redux';
 import { create } from 'jss';
 import rtl from 'jss-rtl';
@@ -11,20 +12,27 @@ import theme from '../src/theme';
 import { initStore } from '../redux/store';
 import Header from '../components/Header';
 import translations from '../translations/arabicTranslation';
+import { storeAdminData } from '../redux/actions/authActions';
 
 // Configure JSS
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
+    let { token } = nextCookie(ctx);
+    if (token) token = JSON.parse(token);
     return {
-      pageProps: Component.getInitialProps
-        ? await Component.getInitialProps(ctx)
-        : {}
+      pageProps: {
+        ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {})
+      },
+      token
     };
   }
 
   componentDidMount() {
+    if (this.props.token) {
+      this.props.store.dispatch(storeAdminData(this.props.token));
+    }
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
@@ -45,9 +53,13 @@ class MyApp extends App {
             <ThemeProvider theme={theme}>
               {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
               <CssBaseline />
-              <Header>
+              {this.props.token ? (
+                <Header>
+                  <Component {...pageProps} />
+                </Header>
+              ) : (
                 <Component {...pageProps} />
-              </Header>
+              )}
             </ThemeProvider>
           </StylesProvider>
         </Provider>
