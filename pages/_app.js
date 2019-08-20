@@ -3,6 +3,8 @@ import nextCookie from 'next-cookies';
 import { Provider } from 'react-redux';
 import { create } from 'jss';
 import rtl from 'jss-rtl';
+import NProgress from 'nprogress';
+import Router from 'next/router';
 import App, { Container } from 'next/app';
 import withRedux from 'next-redux-wrapper';
 import Head from 'next/head';
@@ -13,6 +15,12 @@ import { initStore } from '../redux/store';
 import Header from '../components/Header';
 import translations from '../translations/arabicTranslation';
 import { storeAdminData } from '../redux/actions/authActions';
+
+NProgress.configure({ showSpinner: false });
+
+Router.events.on('routeChangeStart', () => NProgress.start());
+Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeError', () => NProgress.done());
 
 // Configure JSS
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
