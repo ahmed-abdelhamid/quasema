@@ -43,7 +43,7 @@ const Login = ({
   };
 
   useEffect(() => {
-    if (auth) Router.push('/');
+    if (auth) Router.push('/clients');
   }, [auth]);
 
   if (auth) return <Loader title={translations.LOADING} />;

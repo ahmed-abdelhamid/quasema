@@ -11,6 +11,9 @@ module.exports = withFonts({
   },
   target: 'serverless',
   env: {
-    API_URL: process.env.API_URL || 'http://192.168.1.105:7070'
+    API_URL: 'http://cashback.us-east-2.elasticbeanstalk.com'
   }
 });
+
+// http://cashback.us-east-2.elasticbeanstalk.com
+// http://192.168.1.105:7070

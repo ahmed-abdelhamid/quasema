@@ -6,7 +6,7 @@ import cookie from 'js-cookie';
 // Login Admin
 export const login = async ({ token }) => {
   cookie.set('token', token, { expires: 1 });
-  Router.push('/');
+  Router.push('/clients');
 };
 
 // Logout Admin

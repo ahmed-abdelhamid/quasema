@@ -9,7 +9,6 @@ const Index = () => {
 
 Index.getInitialProps = async ctx => {
   const { token } = nextCookie(ctx);
-  const tokenObject = JSON.parse(token);
 
   const redirectOnError = () => {
     typeof window !== 'undefined'
@@ -17,8 +16,14 @@ Index.getInitialProps = async ctx => {
       : ctx.res.writeHead(302, { location: '/login' }).end();
   };
 
+  const redirectOnSuccess = () => {
+    typeof window !== 'undefined'
+    ? Router.push('/clients')
+    : ctx.res.writeHead(302, { location: '/clients' }).end();
+  }
+
   if (token) {
-    return tokenObject;
+    return redirectOnSuccess()
   }
 
   return redirectOnError();
