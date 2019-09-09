@@ -3,6 +3,13 @@ import Router from 'next/router';
 import nextCookie from 'next-cookies';
 import cookie from 'js-cookie';
 
+// Redirect on Error
+export const redirectOnError = ctx => {
+  typeof window !== 'undefined'
+    ? Router.push('/login')
+    : ctx.res.writeHead(302, { location: '/login' }).end();
+};
+
 // Login Admin
 export const login = async ({ token }) => {
   cookie.set('token', token, { expires: 1 });

@@ -16,6 +16,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
+import Tooltip from '@material-ui/core/Tooltip';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import useStyles from '../styles/header';
 import { logout } from '../utils/auth';
@@ -71,11 +72,7 @@ const Header = ({ children }) => {
       >
         <div className={classes.toolbar}>
           <IconButton onClick={() => setDrawerOpen(false)}>
-            {theme.direction === 'rtl' ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>
         <Divider />
@@ -83,7 +80,9 @@ const Header = ({ children }) => {
           {MENU_TABS.map(({ text, icon, link }) => (
             <Link href={link} key={text}>
               <ListItem button>
-                <ListItemIcon>{icon}</ListItemIcon>
+                <ListItemIcon>
+                  <Tooltip title={text}>{icon}</Tooltip>
+                </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             </Link>
