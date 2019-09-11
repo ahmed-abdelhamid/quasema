@@ -53,5 +53,6 @@ export default {
   QUASEMA_ORDER_NO: 'رقم الطلب',
   QUASEMA_ORDER_DATE: 'تاريخ الطلب',
   labelDisplayedRows: ({ from, to, count }) => `${from} - ${to} من اجمالى ${count}`,
-  ROWS_PER_PAGE: 'عدد الوحدات بالصفحة'
+  ROWS_PER_PAGE: 'عدد الوحدات بالصفحة',
+  USERNAME: 'اسم المستخدم'
 };
