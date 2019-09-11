@@ -42,5 +42,16 @@ export default {
   WITHDRAW: 'اجراء تحويل',
   LOWER_ZERO: 'يجب ان يكون المبلغ المحول اكثر من صفر',
   WITHDRAW_SUCCESS: 'تمت عملية التحويل بنجاح',
-  FAILED_WITHDRAW: 'فشل فى عملية التحويل. يرجى إعادة المحاولة'
+  FAILED_WITHDRAW: 'فشل فى عملية التحويل. يرجى إعادة المحاولة',
+  PURCHASES: 'المشتريات',
+  NO_ORDERS: 'لا يوجد مشتريات لهذا المستخدم',
+  QUASEMA_NAME: 'اسم القسيمة',
+  QUASEMA_PROVIDER_NAME: 'اسم مقدم القسيمة',
+  QUASEMA_TYPE: 'نوع القسيمة',
+  QUASEMA_COST: 'مبلغ القسيمة',
+  QUASEMA_AMOUNT: 'عدد القسائم التى تم شرائها',
+  QUASEMA_ORDER_NO: 'رقم الطلب',
+  QUASEMA_ORDER_DATE: 'تاريخ الطلب',
+  labelDisplayedRows: ({ from, to, count }) => `${from} - ${to} من اجمالى ${count}`,
+  ROWS_PER_PAGE: 'عدد الوحدات بالصفحة'
 };
