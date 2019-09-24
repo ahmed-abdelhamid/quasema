@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import Link from 'next/link';
 
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -40,9 +41,13 @@ const ClientsTableButons = ({ client, saveChangeCompanyState }) => {
       {!client.isPanding && (
         <>
           <Tooltip title={translations.OFFERS}>
-            <IconButton color="primary">
-              <SackPercentIcon />
-            </IconButton>
+            <span>
+              <Link href={`/offers?id=${client.companyId}`}>
+                <IconButton color="primary">
+                  <SackPercentIcon />
+                </IconButton>
+              </Link>
+            </span>
           </Tooltip>
 
           <Tooltip title={translations.WALLET}>

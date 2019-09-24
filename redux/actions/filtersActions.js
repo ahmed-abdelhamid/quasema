@@ -1,1 +1,1 @@
-export const filterClientsBy = type => ({ type });
+export const addFilter = type => ({ type });

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Router from 'next/router';
 import nextCookie from 'next-cookies';
 import cookie from 'js-cookie';
@@ -88,4 +89,18 @@ export const auth = ctx => {
 
     return token;
   }
+};
+
+// Change Password
+export const changePassword = async (id, newPassword, oldPassword) => {
+  await axios.put(`${process.env.API_URL}/admin/restorepass`, {
+    userId: id,
+    oldPassword,
+    newPassword
+  });
+};
+
+// Forget Password
+export const forgetPassword = async email => {
+  await axios.put(`${process.env.API_URL}/user/forgotpassword`, { email });
 };

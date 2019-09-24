@@ -12,5 +12,11 @@ export default makeStyles({
   info: {
     fontSize: 25,
     paddingTop: 10
+  },
+  paper: {
+    minHeight: '30vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { useTheme } from '@material-ui/core/styles';
+import MuiLink from '@material-ui/core/Link';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -18,15 +19,19 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import LockReset from 'mdi-material-ui/LockReset';
 import useStyles from '../styles/header';
 import { logout } from '../utils/auth';
 import translations from '../translations/arabicTranslation';
 import { MENU_TABS } from '../utils/fixtures';
 
+import ChangePassword from '../components/ChangePassword';
+
 const Header = ({ children }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [openChangePassword, setOpenChangePassword] = useState(false);
 
   return (
     <div className={classes.root}>
@@ -87,12 +92,26 @@ const Header = ({ children }) => {
               </ListItem>
             </Link>
           ))}
+          <MuiLink componet="button" onClick={() => setOpenChangePassword(true)}>
+            <ListItem button>
+              <ListItemIcon>
+                <Tooltip title={translations.CHANGE_PASSWORD}>
+                  <LockReset />
+                </Tooltip>
+              </ListItemIcon>
+              <ListItemText primary={translations.CHANGE_PASSWORD} />
+            </ListItem>
+          </MuiLink>
         </List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {children}
       </main>
+
+      {openChangePassword && (
+        <ChangePassword open={openChangePassword} onClose={() => setOpenChangePassword(false)} />
+      )}
     </div>
   );
 };

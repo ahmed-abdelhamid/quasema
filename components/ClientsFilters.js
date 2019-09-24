@@ -5,14 +5,14 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
 import translations from '../translations/arabicTranslation';
-import { filterClientsBy } from '../redux/actions/filtersActions';
+import { addFilter } from '../redux/actions/filtersActions';
 
-const ClientsFilters = ({ filterBy, filterClientsBy }) => {
+const ClientsFilters = ({ filterBy, addFilter }) => {
   const handleFilter = (event, type) => {
     if (event.target.checked) {
-      filterClientsBy(type);
+      addFilter(type);
     } else {
-      filterClientsBy('ALL');
+      addFilter('ALL');
     }
   };
 
@@ -43,7 +43,7 @@ const ClientsFilters = ({ filterBy, filterClientsBy }) => {
 const mapStateToProps = ({ filters }) => ({ filterBy: filters.filterClientsBy });
 
 const mapDispatchToProps = dispatch => ({
-  filterClientsBy: type => dispatch(filterClientsBy(type))
+  addFilter: type => dispatch(addFilter(type))
 });
 
 export default connect(
