@@ -112,7 +112,7 @@ const WalletDetails = ({ onClose, open, client, loading, startLoading, endLoadin
                     {translations.CURRENT_BALANCE}:
                   </Grid>
                   <Grid item sm={3}>
-                    {wallet.currentBalnce} SAR
+                    {wallet.currentBalance} SAR
                   </Grid>
                 </Grid>
               </ListItemText>
