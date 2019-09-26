@@ -12,9 +12,11 @@ export const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'center'
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+  logo: {
+    margin: theme.spacing(2),
+    width: '70%',
+    height: '30%',
+    borderRadius: '10px'
   },
   form: {
     width: '100%', // Fix IE 11 issue.

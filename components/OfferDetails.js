@@ -13,13 +13,13 @@ import DialogTitle from './DialogTitle';
 const OfferDetails = ({ onClose, open, offer }) => {
   const LIST_ITEMS = [
     { name: translations.CATEGORY, value: offer.productType.name },
-    { name: translations.ADDRESS, value: offer.address },
     { name: translations.OFFER_PRICE, value: offer.newPrice },
     { name: translations.OFFER_TYPE, value: offer.productType.name },
     { name: translations.AMOUNT, value: offer.amount },
     { name: translations.EXPIRY, value: offer.endDate },
     { name: translations.ILLUSTRATION, value: offer.description },
-    { name: translations.WHY, value: '' }
+    { name: translations.CONDITIONS, value: offer.conditions },
+    { name: translations.WHY, value: offer.address }
   ];
 
   return (

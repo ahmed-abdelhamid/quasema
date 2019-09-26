@@ -48,7 +48,7 @@ const OrdersTable = ({ orders, userId }) => {
             <TableRow key={order.orderId}>
               <TableCell>{order.product.title}</TableCell>
               <TableCell>{order.product.company.user.name}</TableCell>
-              <TableCell>{order.product.productType}</TableCell>
+              <TableCell>{order.product.productType.name}</TableCell>
               <TableCell>{order.product.newPrice}</TableCell>
               <TableCell>{order.quntity}</TableCell>
               <TableCell>{order.orderId}</TableCell>

@@ -1,2 +1,0 @@
-*********1- Need to test withdraw when there is balance
-2- Need to render orders for users when there is orders

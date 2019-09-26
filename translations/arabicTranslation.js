@@ -89,5 +89,6 @@ export default {
   BEST_SALES: 'الأكثر مبيعا',
   BEST_RATES: 'الأكثر تقييما',
   LESS_THAN_THIRTY: 'أقل من 30 ريال',
-  CHARITY: 'خيرى'
+  CHARITY: 'خيرى',
+  CONDITIONS: 'الشروط'
 };

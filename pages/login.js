@@ -8,7 +8,6 @@ import * as Yup from 'yup';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -56,9 +55,7 @@ const Login = ({
     <>
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
+          <img src="/static/images/gift.png" alt="Company Logo" className={classes.logo} />
           <Typography component="h1" variant="h5">
             {translations.LOGIN}
           </Typography>

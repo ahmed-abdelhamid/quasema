@@ -66,8 +66,8 @@ const Clients = ({ clients, removeAllCompanies, saveAllCompanies, companies }) =
           value={tabValue}
           onChange={findRelatedCompanies}
           variant="fullWidth"
-          indicatorColor="secondary"
-          textColor="secondary"
+          indicatorColor="primary"
+          textColor="primary"
         >
           <Tab icon={<TimerIcon />} label={translations.PENDING} />
           <Tab icon={<CheckboxMarkedCircleOutlineIcon />} label={translations.ACTIVE} />

@@ -22,6 +22,7 @@ class MyDocument extends Document {
           />
           <link rel="stylesheet" href="/static/css/loader.css" />
           <link rel="stylesheet" href="/static/css/nprogress.css" />
+          <link rel="icon" href="/static/images/logo.png" type="image/icon" />
         </Head>
         <body dir="rtl">
           <Main />

@@ -12,12 +12,12 @@ import TablePagination from '@material-ui/core/TablePagination';
 import useStyles from '../styles/clientsPage';
 import translations from '../translations/arabicTranslation';
 import { redirectOnError } from '../utils/auth';
-import { getAllOffers, getOffersForClient, filterOffers } from '../utils/offers';
+import { getAllOffers, getOffersForClient } from '../utils/offers';
 import { saveAllOffers, removeAllOffers } from '../redux/actions/offersActions';
 import OffersTable from '../components/OffersTable';
 import OfferFilters from '../components/OffersFilters';
 
-const Offers = ({ offers, saveAllOffers, removeAllOffers }) => {
+const Offers = ({ offers, saveAllOffers, removeAllOffers, filter }) => {
   const classes = useStyles();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(offers.size);
@@ -32,7 +32,7 @@ const Offers = ({ offers, saveAllOffers, removeAllOffers }) => {
     if (router.query.id) {
       offers = await getOffersForClient(router.query.id, rowsPerPage, newPage);
     } else {
-      offers = await getAllOffers(rowsPerPage, newPage);
+      offers = await getAllOffers(rowsPerPage, newPage, filter);
     }
 
     saveAllOffers(offers);
@@ -44,12 +44,18 @@ const Offers = ({ offers, saveAllOffers, removeAllOffers }) => {
     if (router.query.id) {
       offers = await getOffersForClient(router.query.id, +event.target.value);
     } else {
-      offers = await getAllOffers(+event.target.value);
+      offers = await getAllOffers(+event.target.value, 0, filter);
     }
 
     saveAllOffers(offers);
     setPage(0);
     setRowsPerPage(+event.target.value);
+  };
+
+  const handleFilterChange = async (rowsPerPage, filter) => {
+    const offers = await getAllOffers(rowsPerPage, 0, filter);
+    saveAllOffers(offers);
+    setPage(0);
   };
 
   return (
@@ -58,15 +64,18 @@ const Offers = ({ offers, saveAllOffers, removeAllOffers }) => {
         {translations.OFFERS}
       </Typography>
 
-      {offers.content.length === 0 && (
+      {!router.query.id && (
+        <OfferFilters onChangeFilter={handleFilterChange} rowsPerPage={rowsPerPage} />
+      )}
+
+      {(!offers.content || offers.content.length === 0) && (
         <Paper className={classes.paper}>
           <Typography variant="h4">{translations.NO_OFFERS}</Typography>
         </Paper>
       )}
 
-      {offers.content.length !== 0 && (
+      {offers.content && offers.content.length > 0 && (
         <>
-          <OfferFilters />
           <Paper>
             <OffersTable offers={offers.content} />
             <TablePagination
@@ -106,7 +115,10 @@ Offers.getInitialProps = async ctx => {
   return redirectOnError(ctx);
 };
 
-const mapStateToProps = state => ({ offers: filterOffers(state.offers, state.filters) });
+const mapStateToProps = state => ({
+  offers: state.offers,
+  filter: state.filters.filterOffersBy
+});
 
 const mapDispatchToProps = dispatch => ({
   removeAllOffers: () => dispatch(removeAllOffers()),

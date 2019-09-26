@@ -59,7 +59,6 @@ export const withAuthSync = WrappedComponent =>
 
     syncLogout(event) {
       if (event.key === 'logout') {
-        console.log('logged out from storage!');
         Router.push('/login');
       }
     }
@@ -102,5 +101,5 @@ export const changePassword = async (id, newPassword, oldPassword) => {
 
 // Forget Password
 export const forgetPassword = async email => {
-  await axios.put(`${process.env.API_URL}/user/forgotpassword`, { email });
+  await axios.put(`${process.env.API_URL}/admin/forgotpassword`, { email });
 };
