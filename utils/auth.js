@@ -6,9 +6,12 @@ import cookie from 'js-cookie';
 
 // Redirect on Error
 export const redirectOnError = ctx => {
-  typeof window !== 'undefined'
-    ? Router.push('/login')
-    : ctx.res.writeHead(302, { location: '/login' }).end();
+  if (typeof window !== 'undefined') {
+    Router.push('/login');
+  } else {
+    ctx.res.writeHead(302, { location: '/login' });
+    ctx.res.end();
+  }
 };
 
 // Login Admin

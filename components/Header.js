@@ -92,7 +92,7 @@ const Header = ({ children }) => {
               </ListItem>
             </Link>
           ))}
-          <MuiLink componet="button" onClick={() => setOpenChangePassword(true)}>
+          <MuiLink underline="none" componet="button" onClick={() => setOpenChangePassword(true)}>
             <ListItem button>
               <ListItemIcon>
                 <Tooltip title={translations.CHANGE_PASSWORD}>

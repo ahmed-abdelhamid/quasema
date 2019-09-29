@@ -14,6 +14,7 @@ import translations from '../translations/arabicTranslation';
 import { redirectOnError } from '../utils/auth';
 import { getAllOffers, getOffersForClient } from '../utils/offers';
 import { saveAllOffers, removeAllOffers } from '../redux/actions/offersActions';
+import { addFilter } from '../redux/actions/filtersActions';
 import OffersTable from '../components/OffersTable';
 import OfferFilters from '../components/OffersFilters';
 
@@ -109,6 +110,7 @@ Offers.getInitialProps = async ctx => {
       offers = await getAllOffers();
     }
     ctx.store.dispatch(saveAllOffers(offers));
+    ctx.store.dispatch(addFilter(0));
     return {};
   }
 

@@ -9,13 +9,13 @@ import Radio from '@material-ui/core/Radio';
 import { addFilter } from '../redux/actions/filtersActions';
 import translations from '../translations/arabicTranslation';
 
-const OfferFilters = ({ addFilter, onChangeFilter, rowsPerPage }) => {
-  const [value, setValue] = React.useState('0');
+const OfferFilters = ({ addFilter, onChangeFilter, rowsPerPage, filter }) => {
+  const [value, setValue] = React.useState(filter);
 
   const handleChange = async event => {
     addFilter(event.target.value);
     setValue(event.target.value);
-    await onChangeFilter(rowsPerPage, event.target.value === '32' ? '31' : event.target.value);
+    await onChangeFilter(rowsPerPage, event.target.value);
   };
 
   return (
@@ -46,11 +46,13 @@ const OfferFilters = ({ addFilter, onChangeFilter, rowsPerPage }) => {
   );
 };
 
+const mapStateToProps = state => ({ filter: state.filters.filterOffersBy });
+
 const mapDispatchToProps = dispatch => ({
   addFilter: filter => dispatch(addFilter(filter))
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(OfferFilters);

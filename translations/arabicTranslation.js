@@ -90,5 +90,7 @@ export default {
   BEST_RATES: 'الأكثر تقييما',
   LESS_THAN_THIRTY: 'أقل من 30 ريال',
   CHARITY: 'خيرى',
-  CONDITIONS: 'الشروط'
+  CONDITIONS: 'الشروط',
+  TRANSFER_TO_BEST: 'إضافة الى أقوى العروض',
+  REMOVE_FROM_BEST: 'إزالة من أقوى العروض'
 };

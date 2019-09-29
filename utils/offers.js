@@ -23,29 +23,7 @@ export const changeOfferState = async (id, validity) => {
   await axios.put(`${process.env.API_URL}/product/editProductstatus/${id}/${validity}`);
 };
 
-// export const filterOffers = (offers, filters) => {
-//   switch (filters.filterOffersBy) {
-//     case 'allOffers':
-//       return offers;
-//     case 'housing':
-//       const filteredOffers = offers.content.filter(
-//         ({ productType }) => productType.productTypeId === 1
-//       );
-//       return { ...offers, content: filteredOffers };
-//     case 'coffeeShops':
-//     case 'clinics':
-//     case 'travel':
-//     case 'beautyCenters':
-//     case 'shopping':
-//     case 'families':
-//     case 'courses':
-//     case 'others':
-//     case 'bestSales':
-//     case 'bestRates':
-//     case 'lessThanThirty':
-//     case 'charity':
-//     case 'bestOffers':
-//     default:
-//       return offers;
-//   }
-// };
+// Change Offer from Normal to Best Offer
+export const changeOfferFeature = async (id, feature) => {
+  await axios.put(`${process.env.API_URL}/product/editProductfeature/${id}/${feature}`);
+};

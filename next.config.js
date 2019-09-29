@@ -9,7 +9,7 @@ module.exports = withFonts({
 
     return config;
   },
-  target: 'serverless',
+  // target: 'serverless',
   env: {
     API_URL: 'http://cashback.us-east-2.elasticbeanstalk.com'
   }
